@@ -13,7 +13,7 @@ class FileController {
             const parentFile = await File.findOne({ _id: parent });
             if (!parentFile) {
                 file.path = name;
-                await fileService.createDir(file);
+                await fileService.createDir(req, file);
             } else {
                 file.path = `${parentFile.path}/${file.name}`;
                 await fileService.createDir(req, file);
@@ -94,9 +94,9 @@ class FileController {
 
             let path;
             if (parent) {
-                path = `${req.filPath}/${user._id}/${parent.path}/${file.name}`
+                path = `${req.filePath}/${user._id}/${parent.path}/${file.name}`
             } else {
-                path = `${req.filPath}/${user._id}/${file.name}`
+                path = `${req.filePath}/${user._id}/${file.name}`
             }
 
             if (fs.existsSync(path)) {

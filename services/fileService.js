@@ -4,7 +4,7 @@ const config = require("config");
 
 
 class FileService {
-    createDir(file) {
+    createDir(req, file) {
         const filePath = this.getPath(req, file);
         return new Promise(((resolve, reject) => {
             try {
@@ -29,7 +29,8 @@ class FileService {
         }
     }
 
-    getPath(get, file) {
+    getPath(req, file) {
+        console.log("all path:   ", `${req.filePath}/${file.user}/${file.path}`)
         return `${req.filePath}/${file.user}/${file.path}`
     }
 }

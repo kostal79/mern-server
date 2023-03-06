@@ -14,11 +14,11 @@ const PORT = process.env.port || config.get("serverPort");
 
 app.use(corsMiddleware)
 app.use(fileUpload({}))
+app.use(filePathMiddleware(path.resolve(__dirname, 'files')))
 app.use(express.json())
 app.use(express.static('static'))
 app.use("/api/auth", authRouter)
 app.use("/api/files", fileRouter)
-app.use(filePathMiddleware(path.resolve(__dirname, 'files')))
 
 
 const start = () => {
